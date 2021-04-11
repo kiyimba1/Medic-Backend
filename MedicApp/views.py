@@ -1,7 +1,7 @@
 from rest_framework.serializers import Serializer
 from MedicApp import serializes
 from MedicApp.serializes import CompanyBankSerializer, CompanySerializer
-from MedicApp.models import Company
+from MedicApp.models import Company, CompanyBank
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -28,7 +28,7 @@ class CompanyViewSet(viewsets.ViewSet):
         try:
             serializer = CompanySerializer(
                 data=request.data, context={"request": request})
-            serializer.is_valid()
+            serializer.is_valid(raise_exception=True)
             serializer.save()
             dict_response = {"error": False,
                              "message": "Company Data Save Successful"}
@@ -61,7 +61,7 @@ class CompanyBankViewset(viewsets.ViewSet):
         try:
             serializer = CompanyBankSerializer(
                 data=request.data, context={"request": request})
-            serializer.is_valid()
+            serializer.is_valid(raise_exception=True)
             serializer.save()
             dict_response = {"error": False,
                              "message": "Company Bank Data Save Successful"}
@@ -69,6 +69,31 @@ class CompanyBankViewset(viewsets.ViewSet):
             dict_response = {
                 "error": True, "message": "Error While Trying to Save Company Bank Data"}
         return Response(dict_response)
+
+    def list(self, request):
+        companybank = CompanyBank.objects.all()
+        serializer = CompanyBankSerializer(
+            companybank, many=True, context={"request": request})
+        response_dict = {
+            "error": False, "message": "All Company Bank List Data", "data": serializer.data}
+        return Response(response_dict)
+
+    def retrieve(self, request, pk=None):
+        queryset = CompanyBank.objects.all()
+        companybank = get_object_or_404(queryset, pk=pk)
+        serializer = CompanyBankSerializer(
+            companybank, context={"request": "request"})
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        queryset = CompanyBank.objects.all()
+        companybank = get_object_or_404(queryset, pk=pk)
+        serializer = CompanyBankSerializer(
+            companybank, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Update Successful"})
+
 
 company_list = CompanyViewSet.as_view({"get": "list"})
 company_create = CompanyViewSet.as_view({"post": "create"})

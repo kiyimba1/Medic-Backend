@@ -91,7 +91,7 @@ class EmployeeBank(models.Model):
     added_on = models.DateField(auto_now_add=True)
 
 class CompanyAccount(models.Model):
-    choices = ("Debit", "Credit")
+    choices = (("D","Debit"), ("C","Credit"))
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
     transaction_type = models.Choices(choices)

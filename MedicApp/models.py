@@ -94,7 +94,7 @@ class CompanyAccount(models.Model):
     choices = (("D","Debit"), ("C","Credit"))
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    transaction_type = models.Choices(choices)
+    transaction_type = models.CharField(choices=choices, max_length=255)
     transaction_amount = models.CharField(max_length=255)
     transaction_date = models.DateField()
     added_on = models.DateField(auto_now_add=True)

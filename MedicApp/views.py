@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.serializers import Serializer
 from MedicApp import serializes
-from MedicApp.serializes import CompanyBankSerializer, CompanySerializer, MedicineSerializer
+from MedicApp.serializes import CompanyBankSerializer, CompanySerializer, MedicalDetailsSerializer, MedicineSerializer
 from MedicApp.models import Company, CompanyBank, Medicine
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -124,7 +124,7 @@ class MedicineViewset(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         queryset = Medicine.objects.all()
         medicine = get_object_or_404(queryset, pk=pk)
-        serializer = MedicineSerializer(
+        serializer = MedicalDetailsSerializer(
             medicine, context={"request": "request"})
         return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
 

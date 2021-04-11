@@ -1,10 +1,14 @@
 from rest_framework import serializers
 
-from .models import Company
+from .models import Company, CompanyBank
 
 
-class CompanySerializer(serializers.HyperlinkedModelSerializer):
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ["name", "license_no", "address",
-                  "contact_no", "email", "description"]
+        fields = "__all__"
+
+class CompanyBankSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyBank
+        fields = "__all__"

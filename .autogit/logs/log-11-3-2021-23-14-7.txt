@@ -1,0 +1,23 @@
+-------------------- Auto-Git Log --------------------
+		Sun Apr 11 2021 23:14:07 GMT+0300 (East Africa Time)
+------------------------------------------------------
+
+Modified files:
+* .vscode/settings.json
+* MedicApp/views.py
+* config/__pycache__/settings.cpython-38.pyc
+* config/__pycache__/urls.cpython-38.pyc
+* config/settings.py
+* config/urls.py
+
+
+Created files:
+* MedicApp/__pycache__/serializes.cpython-38.pyc
+* MedicApp/__pycache__/views.cpython-38.pyc
+* MedicApp/serializes.py
+
+
+Deleted files:
+
+
+Renamed files:

@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.serializers import Serializer
 from MedicApp import serializes
 from MedicApp.serializes import CompanyBankSerializer, CompanySerializer
@@ -93,6 +94,14 @@ class CompanyBankViewset(viewsets.ViewSet):
         serializer.is_valid()
         serializer.save()
         return Response({"error": False, "message": "Update Successful"})
+
+
+class CompanyNameViewSet(generics.ListAPIView):
+    serializer_class = CompanySerializer
+
+    def get_queryset(self):
+        name = self.kwargs["name"]
+        return Company.objects.filter(name=name)
 
 
 company_list = CompanyViewSet.as_view({"get": "list"})

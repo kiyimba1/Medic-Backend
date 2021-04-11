@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.serializers import Serializer
 from MedicApp import serializes
-from MedicApp.serializes import CompanyBankSerializer, CompanySerializer, MedicalDetailsSerializer, MedicineSerializer
-from MedicApp.models import Company, CompanyBank, Medicine
+from MedicApp.serializes import BillSerializer, CompanyBankSerializer, CompanySerializer, CustomerRequestSerializer, CustomerSerializer, EmployeeSerializer, MedicalDetailsSerializer, MedicineSerializer
+from MedicApp.models import Bill, Company, CompanyBank, Customer, CustomerRequest, Employee, Medicine
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -133,6 +133,174 @@ class MedicineViewset(viewsets.ViewSet):
         medicine = get_object_or_404(queryset, pk=pk)
         serializer = MedicineSerializer(
             medicine, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Update Successful"})
+
+
+class EmployeeViewset(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = EmployeeSerializer(
+                data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False,
+                             "message": "Employee Data Save Successful"}
+        except:
+            dict_response = {
+                "error": True, "message": "Error While Trying to Save Employee Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        employee = Employee.objects.all()
+        serializer = EmployeeSerializer(
+            employee, many=True, context={"request": request})
+        response_dict = {
+            "error": False, "message": "All Employee List Data", "data": serializer.data}
+        return Response(response_dict)
+
+    def retrieve(self, request, pk=None):
+        queryset = Employee.objects.all()
+        employee = get_object_or_404(queryset, pk=pk)
+        serializer = EmployeeSerializer(
+            employee, context={"request": "request"})
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        queryset = Employee.objects.all()
+        employee = get_object_or_404(queryset, pk=pk)
+        serializer = MedicineSerializer(
+            employee, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Update Successful"})
+
+
+class CustomerViewset(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = CustomerSerializer(
+                data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False,
+                             "message": "Customer Data Save Successful"}
+        except:
+            dict_response = {
+                "error": True, "message": "Error While Trying to Save Customer Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        customer = Customer.objects.all()
+        serializer = CustomerSerializer(
+            customer, many=True, context={"request": request})
+        response_dict = {
+            "error": False, "message": "All Customer List Data", "data": serializer.data}
+        return Response(response_dict)
+
+    def retrieve(self, request, pk=None):
+        queryset = Customer.objects.all()
+        customer = get_object_or_404(queryset, pk=pk)
+        serializer = CustomerSerializer(
+            customer, context={"request": "request"})
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        queryset = Customer.objects.all()
+        customer = get_object_or_404(queryset, pk=pk)
+        serializer = CustomerSerializer(
+            customer, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Update Successful"})
+
+
+class BillViewset(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = BillSerializer(
+                data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False,
+                             "message": "Bill Data Save Successful"}
+        except:
+            dict_response = {
+                "error": True, "message": "Error While Trying to Save Bill Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        bill = Bill.objects.all()
+        serializer = CustomerSerializer(
+            bill, many=True, context={"request": request})
+        response_dict = {
+            "error": False, "message": "All Bill List Data", "data": serializer.data}
+        return Response(response_dict)
+
+    def retrieve(self, request, pk=None):
+        queryset = Bill.objects.all()
+        bill = get_object_or_404(queryset, pk=pk)
+        serializer = BillSerializer(
+            bill, context={"request": "request"})
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        queryset = Bill.objects.all()
+        bill = get_object_or_404(queryset, pk=pk)
+        serializer = BillSerializer(
+            bill, data=request.data, context={"request": request})
+        serializer.is_valid()
+        serializer.save()
+        return Response({"error": False, "message": "Update Successful"})
+
+
+class CustomerRequestViewset(viewsets.ViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request):
+        try:
+            serializer = CustomerSerializer(
+                data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False,
+                             "message": "Request Data Save Successful"}
+        except:
+            dict_response = {
+                "error": True, "message": "Error While Trying to Save Request Data"}
+        return Response(dict_response)
+
+    def list(self, request):
+        customer_request = CustomerRequest.objects.all()
+        serializer = CustomerRequestSerializer(
+            customer_request, many=True, context={"request": request})
+        response_dict = {
+            "error": False, "message": "All Request List Data", "data": serializer.data}
+        return Response(response_dict)
+
+    def retrieve(self, request, pk=None):
+        queryset = CustomerRequest.objects.all()
+        customer_request = get_object_or_404(queryset, pk=pk)
+        serializer = CustomerRequestSerializer(
+            customer_request, context={"request": "request"})
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
+
+    def update(self, request, pk=None):
+        queryset = CustomerRequest.objects.all()
+        customer_request = get_object_or_404(queryset, pk=pk)
+        serializer = CustomerSerializer(
+            customer_request, data=request.data, context={"request": request})
         serializer.is_valid()
         serializer.save()
         return Response({"error": False, "message": "Update Successful"})

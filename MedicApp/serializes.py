@@ -31,6 +31,12 @@ class MedicineSerializer(serializers.ModelSerializer):
         return response
 
 
+class MedicalDetailsSerializerSimple(serializers.ModelSerializer):
+    class Meta:
+        model = Medicine
+        fields = "__all__"
+
+
 class MedicalDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = MedicalDetails
@@ -47,7 +53,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = MedicalDetails
         fields = "__all__"
 
-    
+
 class EmployeeSalarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee

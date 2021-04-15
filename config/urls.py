@@ -30,13 +30,14 @@ router.register("medicine", views.MedicineViewset, basename="medicine")
 router.register("employee", views.EmployeeViewset, basename="employee")
 router.register("customer", views.CustomerViewset, basename="customer")
 router.register("bill", views.BillViewset, basename="bill")
-router.register("customerrequest", views.CustomerRequestViewset, basename="customerrequest")
+router.register("customerrequest", views.CustomerRequestViewset,
+                basename="customerrequest")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/gettoken', TokenObtainPairView.as_view(), name="gettoken"),
-    path('api/refresh_token', TokenRefreshView.as_view(), name="refresh_token"),
+    path('api/refresh_token/', TokenRefreshView.as_view(), name="refresh_token"),
     path('api/companybyname/<str:name>',
          views.CompanyNameViewSet.as_view(), name="companybyname"),
 

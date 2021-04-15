@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Thu Apr 15 2021 16:43:44 GMT+0300 (East Africa Time)
+------------------------------------------------------
+
+Modified files:
+* MedicApp/__pycache__/serializes.cpython-38.pyc
+* MedicApp/__pycache__/views.cpython-38.pyc
+* MedicApp/serializes.py
+* MedicApp/views.py
+
+
+Created files:
+* .autogit/logs/log-15-3-2021-15-43-34.txt
+
+
+Deleted files:
+
+
+Renamed files:

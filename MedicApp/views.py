@@ -53,6 +53,20 @@ class CompanyViewSet(viewsets.ViewSet):
                 "error": True, "message": "Error While Trying to Update Company Data"}
         return Response(dict_response)
 
+    def retrieve(self, request, pk=None):
+        queryset = Company.objects.all()
+        company = get_object_or_404(queryset, pk=pk)
+        serializer = CompanySerializer(company, context={"request": "request"})
+
+        serializer_data = serializer.data
+        company_bank_details = CompanyBank.objects.filter(
+            company_id=serializer_data["id"])
+        company_bank_details_serializer = CompanyBankSerializer(
+            company_bank_details, many=True)
+        serializer_data["company_bank"] = company_bank_details_serializer.data
+
+        return Response({"error": False, "message": "single Data Fetch", "data": serializer_data})
+
 
 class CompanyBankViewset(viewsets.ViewSet):
     authentication_classes = [JWTAuthentication]
@@ -154,12 +168,12 @@ class MedicineViewset(viewsets.ViewSet):
             medicine, context={"request": "request"})
 
         serializer_data = serializer.data
-        medicine_details = MedicalDetails.objects.filter(medicine_id=serializer_data["id"])
-        medicine_details_serializer = MedicalDetailsSerializerSimple(medicine_details, many=True)
+        medicine_details = MedicalDetails.objects.filter(
+            medicine_id=serializer_data["id"])
+        medicine_details_serializer = MedicalDetailsSerializerSimple(
+            medicine_details, many=True)
         serializer_data["medicine_details"] = medicine_details_serializer.data
-       
 
-        
         return Response({"error": False, "message": "single Data Fetch", "data": serializer.data})
 
     def update(self, request, pk=None):

@@ -362,6 +362,13 @@ class CompanyNameViewSet(generics.ListAPIView):
         return Company.objects.filter(name=name)
 
 
+class CompanyOnlyViewSet(generics.ListAPIView):
+    serializer_class = CompanySerializer
+
+    def get_queryset(self):
+        return Company.objects.all()
+
+
 company_list = CompanyViewSet.as_view({"get": "list"})
 company_create = CompanyViewSet.as_view({"post": "create"})
 company_update = CompanyViewSet.as_view({"put": "update"})

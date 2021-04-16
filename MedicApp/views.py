@@ -146,7 +146,7 @@ class MedicineViewset(viewsets.ViewSet):
         serializer = MedicineSerializer(
             medicine, many=True, context={"request": request})
 
-        medicine_data = serializer.data()
+        medicine_data = serializer.data
         new_medicine_list = []
 
         for medicine in medicine_data:

@@ -40,7 +40,7 @@ urlpatterns = [
     path('api/refresh_token/', TokenRefreshView.as_view(), name="refresh_token"),
     path('api/companybyname/<str:name>',
          views.CompanyNameViewSet.as_view(), name="companybyname"),
-    path('api/companyonly', views.CompanyOnlyViewSet.as_view(), name="companyonly"),
+    path('api/companyonly/', views.CompanyOnlyViewSet.as_view(), name="companyonly"),
 
 
 ]

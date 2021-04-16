@@ -35,7 +35,6 @@ class MedicalDetails(models.Model):
     id = models.AutoField(primary_key=True)
     medicine_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     salt_name = models.CharField(max_length=255)
-    salt_name = models.CharField(max_length=255)
     salt_qyt = models.CharField(max_length=255)
     salt_qyt_type = models.CharField(max_length=255)
     added_on = models.DateField(auto_now_add=True)

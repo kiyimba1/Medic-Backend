@@ -115,31 +115,33 @@ class MedicineViewset(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def create(self, request):
-        try:
-            serializer = MedicineSerializer(
-                data=request.data, context={"request": request})
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
+        # try:
+        serializer = MedicineSerializer(
+            data=request.data, context={"request": request})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-            # access id that was just saved to db
-            medicine_id = serializer.data['id']
+        # access id that was just saved to db
+        medicine_id = serializer.data['id']
 
-            medicine_details_list = []
-            for medicine_detail in request.data["medicine_details"]:
-                medicine_detail["medicine_id"] = medicine_id
-                medicine_details_list.append(medicine_detail)
+        medicine_details_list = []
+        for medicine_detail in request.data["medicine_details"]:
+            medicine_detail["medicine_id"] = medicine_id
+            medicine_details_list.append(medicine_detail)
 
-            serializer2 = MedicalDetailsSerializer(
-                data=medicine_details_list, many=True, context={"request": request})
-            serializer2.is_valid()
-            serializer2.save()
+        serializer2 = MedicalDetailsSerializer(
+            data=medicine_details_list, many=True, context={"request": request})
+        serializer2.is_valid()
+        print(serializer2.data)
+        serializer2.save()
 
-            dict_response = {"error": False,
-                             "message": "Medicine Data Save Successful"}
-        except:
-            dict_response = {
-                "error": True, "message": "Error While Trying to Save Medicine Data"}
+        dict_response = {"error": False,
+                         "message": "Medicine Data Save Successful"}
         return Response(dict_response)
+        # except:
+        #     dict_response = {
+        #         "error": True, "message": "Error While Trying to Save Medicine Data"}
+        # return Response(dict_response)
 
     def list(self, request):
         medicine = Medicine.objects.all()
@@ -147,18 +149,19 @@ class MedicineViewset(viewsets.ViewSet):
             medicine, many=True, context={"request": request})
 
         medicine_data = serializer.data
-        new_medicine_list = []
+        # new_medicine_list = []
 
-        for medicine in medicine_data:
-            medicine_details = MedicalDetails.objects.filter(
-                medicine_id=medicine["id"])
-            medicine_details_serializer = MedicalDetailsSerializerSimple(
-                medicine_details, many=True)
-            medicine["medicine_details"] = medicine_details_serializer.data
-            new_medicine_list.append(medicine)
+        # for medicine in medicine_data:
+        #     medicine_details = MedicalDetails.objects.filter(
+        #         medicine_id=medicine["id"])
+        #     medicine_details_serializer = MedicineSerializer(
+        #         medicine_details, many=True)
+        #     medicine["medicine_details"] = medicine_details_serializer.data
+        #     new_medicine_list.append(medicine)
+        print(medicine_data)
 
         response_dict = {
-            "error": False, "message": "All Medicine List Data", "data": serializer.data}
+            "error": False, "message": "All Medicine List Data", "data": medicine_data}
         return Response(response_dict)
 
     def retrieve(self, request, pk=None):

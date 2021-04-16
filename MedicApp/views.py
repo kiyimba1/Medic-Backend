@@ -154,11 +154,11 @@ class MedicineViewset(viewsets.ViewSet):
         for medicine in medicine_data:
             medicine_details = MedicalDetails.objects.filter(
                 medicine_id=medicine["id"])
-            medicine_details_serializer = MedicineSerializer(
+            medicine_details_serializer = MedicalDetailsSerializer(
                 medicine_details, many=True)
             medicine["medicine_details"] = medicine_details_serializer.data
             new_medicine_list.append(medicine)
-        print(medicine_data)
+        # print(medicine_data)
 
         response_dict = {
             "error": False, "message": "All Medicine List Data", "data": medicine_data}

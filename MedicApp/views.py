@@ -505,6 +505,8 @@ class CustomerRequestViewset(viewsets.ViewSet):
 
 
 class CompanyNameViewSet(generics.ListAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = CompanySerializer
 
     def get_queryset(self):
@@ -512,7 +514,19 @@ class CompanyNameViewSet(generics.ListAPIView):
         return Company.objects.filter(name=name)
 
 
+class EmployeeBankByEIDViewSet(generics.ListAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmployeeBankSerializer
+
+    def get_queryset(self):
+        employee_id = self.kwargs["eid"]
+        return EmployeeBank.objects.filter(employee_id=employee_id)
+
+
 class CompanyOnlyViewSet(generics.ListAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = CompanySerializer
 
     def get_queryset(self):

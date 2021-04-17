@@ -115,16 +115,16 @@ class CompanyAccountViewset(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
 
     def create(self, request):
-        # try:
-        serializer = CompanyAccountSerializer(
-            data=request.data, context={"request": request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        dict_response = {"error": False,
-                         "message": "Company Bank Data Save Successful"}
-        # except:
-        #     dict_response = {
-        #         "error": True, "message": "Error While Trying to Save Company Bank Data"}
+        try:
+            serializer = CompanyAccountSerializer(
+                data=request.data, context={"request": request})
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            dict_response = {"error": False,
+                             "message": "Company Bank Data Save Successful"}
+        except:
+            dict_response = {
+                "error": True, "message": "Error While Trying to Save Company Bank Data"}
         return Response(dict_response)
 
     def list(self, request):

@@ -53,9 +53,9 @@ urlpatterns = [
          views.CompanyNameViewSet.as_view(), name="companybyname"),
     path('api/companyonly/', views.CompanyOnlyViewSet.as_view(), name="companyonly"),
     path('api/employee_bank_by_id/<str:employee_id>',
-         views.EmployeeBankByEIDViewSet.as_view(), name="employee_bank_by_id"),
+         views.EmployeeBankByEIDViewSet.as_view({'get': 'list'}), name="employee_bank_by_id"),
     path('api/employee_salary_by_id/<str:employee_id>',
-         views.EmployeeSalaryViewset.as_view(), name="employee_salary_by_id"),
+         views.EmployeeSalaryViewset.as_view({'get': 'list'}), name="employee_salary_by_id"),
 
 
 ]

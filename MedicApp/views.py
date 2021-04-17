@@ -287,7 +287,7 @@ class EmployeeViewset(viewsets.ViewSet):
     def update(self, request, pk=None):
         queryset = Employee.objects.all()
         employee = get_object_or_404(queryset, pk=pk)
-        serializer = MedicineSerializer(
+        serializer = EmployeeSerializer(
             employee, data=request.data, context={"request": request})
         serializer.is_valid()
         serializer.save()

@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.serializers import Serializer
+from rest_framework.views import APIView
 from MedicApp import serializes
 from MedicApp.serializes import BillSerializer, CompanyAccountSerializer, CompanyBankSerializer, CompanySerializer, CustomerRequestSerializer, CustomerSerializer, EmployeeBankSerializer, EmployeeSalarySerializer, EmployeeSerializer, MedicalDetailsSerializer, MedicalDetailsSerializerSimple, MedicineSerializer
 from MedicApp.models import Bill, Company, CompanyAccount, CompanyBank, Customer, CustomerRequest, Employee, EmployeeBank, EmployeeSalary, MedicalDetails, Medicine
@@ -520,7 +521,7 @@ class EmployeeBankByEIDViewSet(generics.ListAPIView):
     serializer_class = EmployeeBankSerializer
 
     def get_queryset(self):
-        employee_id = self.kwargs["eid"]
+        employee_id = self.kwargs["employee_id"]
         return EmployeeBank.objects.filter(employee_id=employee_id)
 
 
@@ -530,7 +531,7 @@ class EmployeeSalaryByEIDViewSet(generics.ListAPIView):
     serializer_class = EmployeeSalarySerializer
 
     def get_queryset(self):
-        employee_id = self.kwargs["eid"]
+        employee_id = self.kwargs["employee_id"]
         return EmployeeSalary.objects.filter(employee_id=employee_id)
 
 

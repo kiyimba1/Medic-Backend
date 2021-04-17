@@ -1,6 +1,6 @@
 from rest_framework import response, serializers
 
-from .models import Bill, Company, CompanyAccount, CompanyBank, Customer, CustomerRequest, Employee, EmployeeBank, MedicalDetails, Medicine
+from .models import Bill, Company, CompanyAccount, CompanyBank, Customer, CustomerRequest, Employee, EmployeeBank, EmployeeSalary, MedicalDetails, Medicine
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -56,13 +56,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class EmployeeSalarySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Employee
+        model = EmployeeSalary
+        
         fields = "__all__"
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['employee'] = EmployeeSerializer(instance.employee_id).data
-        return response
 
 
 class CustomerSerializer(serializers.ModelSerializer):

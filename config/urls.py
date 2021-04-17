@@ -32,6 +32,8 @@ router.register("customer", views.CustomerViewset, basename="customer")
 router.register("bill", views.BillViewset, basename="bill")
 router.register("customerrequest", views.CustomerRequestViewset,
                 basename="customerrequest")
+router.register("companyaccount", views.CompanyAccountViewset,
+                basename="companyaccount")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

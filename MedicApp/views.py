@@ -546,3 +546,5 @@ class CompanyOnlyViewSet(generics.ListAPIView):
 company_list = CompanyViewSet.as_view({"get": "list"})
 company_create = CompanyViewSet.as_view({"post": "create"})
 company_update = CompanyViewSet.as_view({"put": "update"})
+# employee_bank_by_id = EmployeeBankByEIDViewSet.as_view({"get": "list"})
+# employee_salary_by_id = EmployeeSalaryByEIDViewSet.as_view({"get": "list"})

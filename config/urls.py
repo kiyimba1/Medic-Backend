@@ -38,10 +38,10 @@ router.register("employee_all_bank", views.EmployeeBankViewset,
                 basename="employee_all_bank")
 router.register("employee_all_salary", views.EmployeeSalaryViewset,
                 basename="employee_all_salary")
-router.register("employee_bank_by_id", views.EmployeeSalaryViewset,
-                basename="employee_bank_by_id")
-router.register("employee_salary_by_id", views.EmployeeSalaryViewset,
-                basename="employee_salary_by_id")
+# router.register("employee_bank_by_id", views.EmployeeSalaryViewset,
+#                 basename="employee_bank_by_id")
+# router.register("employee_salary_by_id", views.EmployeeSalaryViewset,
+#                 basename="employee_salary_by_id")
 
 
 urlpatterns = [
@@ -52,10 +52,10 @@ urlpatterns = [
     path('api/companybyname/<str:name>',
          views.CompanyNameViewSet.as_view(), name="companybyname"),
     path('api/companyonly/', views.CompanyOnlyViewSet.as_view(), name="companyonly"),
-    path('api/employee_bank_by_id/<str:employee_id>',
-         views.EmployeeBankByEIDViewSet.as_view({'get': 'list'}), name="employee_bank_by_id"),
-    path('api/employee_salary_by_id/<str:employee_id>',
-         views.EmployeeSalaryViewset.as_view({'get': 'list'}), name="employee_salary_by_id"),
+    # path('api/employee_bank_by_id/<str:employee_id>',
+    #      views.EmployeeBankByEIDViewSet.as_view({'get': 'retrieve'}), name="employee_bank_by_id"),
+    # path('api/employee_salary_by_id/<str:employee_id>',
+    #      views.EmployeeSalaryByEIDViewSet.as_view({'get': 'retrieve'}), name="employee_salary_by_id"),
 
 
 ]

@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Sat Apr 17 2021 21:35:09 GMT+0300 (East Africa Time)
+------------------------------------------------------
+
+Modified files:
+* MedicApp/__pycache__/views.cpython-38.pyc
+* MedicApp/views.py
+* config/__pycache__/urls.cpython-38.pyc
+* config/urls.py
+
+
+Created files:
+* .autogit/logs/log-17-3-2021-21-5-2.txt
+
+
+Deleted files:
+
+
+Renamed files:

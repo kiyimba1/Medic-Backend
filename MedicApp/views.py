@@ -186,6 +186,27 @@ class MedicineViewset(viewsets.ViewSet):
             medicine, data=request.data, context={"request": request})
         serializer.is_valid()
         serializer.save()
+        # print(request.data)
+        for salt_detail in request.data["medicinedetails"]:
+            if salt_detail["id"] == 0:
+                del salt_detail["id"]
+                salt_detail["medicine_id"] = serializer.data["id"]
+                serializer2 = MedicalDetailsSerializer(
+                    data=salt_detail, context={"request": request})
+                serializer2.is_valid()
+                # print(serializer2.data)
+                serializer2.save()
+            else:
+                queryset2 = MedicalDetails.objects.all()
+                medicine_salt = get_object_or_404(
+                    queryset2, pk=salt_detail["id"])
+                del salt_detail["id"]
+                salt_detail["medicine_id"] = serializer.data["id"]
+                serializer3 = MedicalDetailsSerializer(
+                    medicine_salt, data=salt_detail, context={"request": request})
+                serializer3.is_valid()
+                serializer3.save()
+                # print("update")
         return Response({"error": False, "message": "Update Successful"})
 
 
